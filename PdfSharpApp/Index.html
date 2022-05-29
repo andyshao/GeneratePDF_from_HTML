@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <style>
-        .ad-border {
+        .add-border {
             border: 1px solid black;
         }
 
-        .ad-border-slip {
+        .add-border-slip {
             border: 1px solid black;
         }
 
@@ -22,13 +22,12 @@
         }
 
         .margin-table {
-            margin: 10px 3px;
+            margin: 5px 0 10px 12px;
         }
-
-            .margin-table tr td {
-                min-width: 3em;
-                max-width: 8em;
-            }
+        /*.margin-table tr td{
+            min-width: 3em;
+            max-width: 8em;
+        }*/
 
         .padding-for-cell {
             padding: 5px;
@@ -44,19 +43,32 @@
         }
 
         .products-heading {
-            padding: 12px 3px;
+            padding: 12px 0 12px 3px;
         }
 
         .vertical-align {
             vertical-align: top;
         }
+
+        .width-95 {
+            width: 95%;
+        }
+
+        .font-weight-bold {
+            font-weight: bold;
+        }
+
+        .footer {
+            padding: 2px 0 25px 5px;
+            margin-top: 150px;
+        }
     </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
-<body class="m-2">
-    <table class="header-table margin-table">
-        <tr class="w-95">
-            <td class="w-25 ad-border-slip">
+<body>
+    <table class="header-table margin-table width-95">
+        <tr>
+            <td class="w-25 add-border-slip">
                 <div class="grey-background border-bottom">
                     <h1 class="m-0 p-0 text-center packing-slip">PACKING SLIP</h1>
                     <h6 class="m-0 p-0 text-center"><i>This is not an invoice</i></h6>
@@ -83,62 +95,63 @@
         </tr>
     </table>
 
-    <table class="w-95 margin-table" style="padding-right: 20px">
+    <table class="w-95 margin-table">
         <tr>
-            <td class="ad-border grey-background">
+            <td class="add-border grey-background">
                 <h3 class="m-0 p-0">ORDER </h3>
                 <h3 class="m-0 p-0"> DATE </h3>
             </td>
-            <td class="ad-border"><p>{{OrderDate}}</p></td>
-            <td class="ad-border grey-background"><h3 class="m-0 p-0">PRINT DATE</h3></td>
-            <td class="ad-border w-15"><p>{{PrintDate}}</p></td>
-            <td class="ad-border grey-background">
+            <td class="add-border"><p>{{OrderDate}}</p></td>
+            <td class="add-border grey-background"><h3 class="m-0 p-0">PRINT DATE</h3></td>
+            <td class="add-border"><p>{{PrintDate}}</p></td>
+            <td class="add-border grey-background">
                 <h3 class="m-0 p-0">ORDERED</h3>
                 <h3 class="m-0 p-0">BY</h3>
             </td>
-            <td class="ad-border w-40"><p>{{OrderedBy}}{{OrderedBy}}{{OrderedBy}}{{OrderedBy}}</p></td>
+            <td class="add-border"><p>{{OrderedBy}}{{OrderedBy}}{{OrderedBy}}</p></td>
         </tr>
         <tr>
-            <td class="ad-border grey-background">
+            <td class="add-border grey-background">
                 <h3 class="m-0 p-0">PAYMENT</h3>
                 <h3 class="m-0 p-0">TERMS</h3>
             </td>
-            <td class="ad-border" colspan="5"><p>{{PaymentTerms}}</p></td>
+            <td class="add-border" colspan="5"><p>{{PaymentTerms}}</p></td>
         </tr>
         <tr>
-            <td class="ad-border grey-background"><h3 class="m-0 p-0">SHIP VIA</h3></td>
-            <td class="ad-border" colspan="2"><p>{{ShipVia}}</p></td>
-            <td class="ad-border grey-background">
+            <td class="add-border grey-background"><h3 class="m-0 p-0">SHIP VIA</h3></td>
+            <td class="add-border" colspan="2"><p>{{ShipVia}}</p></td>
+            <td class="add-border grey-background">
                 <h3 class="m-0 p-0">PURCHASE ORDER NUMBER</h3>
             </td>
-            <td class="ad-border" colspan="2"><p>{{PurchaseOrderNumber}}</p></td>
+            <td class="add-border" colspan="2"><p>{{PurchaseOrderNumber}}</p></td>
         </tr>
     </table>
 
-    <table>
-        <tr class="w-100">
+    <table class="margin-table width-95">
+        <tr>
             <td class="padding-for-cell w-50"><h3 class="m-0 p-0">Page 1 of 1</h3></td>
             <td class="padding-for-cell w-50"><h3 class="m-0 p-0" style="text-align: right">Account Type: C</h3></td>
         </tr>
     </table>
 
-    <h3 class="grey-background products-heading" style="text-align: left;">Products contained in this shipment</h3>
+    <h3 class="grey-background products-heading margin-table" style="text-align: left; width: 98%;">Products contained in this shipment</h3>
 
-    <table class="my-table w-100 margin-table">
+
+    <table class="width-95 product-table margin-table">
         <thead>
             <tr>
-                <th><h6 class="m-0 p-0">Quantity</h6></th>
-                <th><h6 class="m-0 p-0">Item Code</h6></th>
-                <th><h6 class="m-0 p-0">Item description</h6></th>
+                <th class="padding-for-cell"><h6 class="m-0 p-0">Quantity</h6></th>
+                <th class="padding-for-cell"><h6 class="m-0 p-0">Item Code</h6></th>
+                <th class="padding-for-cell"><h6 class="m-0 p-0">Item description</h6></th>
             </tr>
         </thead>
-        <tbody style="border: 2px solid">
+        <tbody class="add-border">
             {{productDetailsContent}}
         </tbody>
     </table>
 
-    <footer>
-        <h3 class="m-0 p-0"><span style=""> Comments: </span>Customers has a dock and recieve truck shipments</h3>
-    </footer>
+    <div class="margin-table footer add-border w-98">
+        <p>Comments: <span class="font-weight-bold">Customers has a dock and recieve truck shipments</span></p>
+    </div>
 </body>
 </html>

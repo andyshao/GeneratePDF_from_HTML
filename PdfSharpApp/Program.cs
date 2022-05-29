@@ -115,28 +115,28 @@ namespace PdfSharpApp
             ProductDetail product2 = new ProductDetail();
             product2.Quantity = 9;
             product2.ItemCode = "Sugdddfar50";
-            product2.Type = "foadfadsfd";
+            product2.Type = "CPT Professional (Spiral)";
             product2.ISBN = 123124555;
             products.Add(product2);
 
             ProductDetail product3 = new ProductDetail();
             product3.Quantity = 100;
             product3.ItemCode = "dsfsadf";
-            product3.Type = "foaafdaod";
+            product3.Type = "CPT Professional (Spiral)";
             product3.ISBN = 1124455;
             products.Add(product3);
 
             ProductDetail product4 = new ProductDetail();
             product4.Quantity = 100;
             product4.ItemCode = "dsfsadf";
-            product4.Type = "foaafdaod";
+            product4.Type = "CPT Professional (Spiral)";
             product4.ISBN = 1124455;
             products.Add(product4);
 
             ProductDetail product5 = new ProductDetail();
             product5.Quantity = 100;
             product5.ItemCode = "dsfsadf";
-            product5.Type = "foaafdaod";
+            product5.Type = "CPT Professional (Spiral)";
             product5.ISBN = 1124455;
             products.Add(product5);
 
@@ -167,7 +167,7 @@ namespace PdfSharpApp
             List<ProductDetail> products = BuildModel_Main();
             foreach (ProductDetail product in products)
             {
-                string txt = "<tr><td class=\"add-border padding-for-cell\"><h4 class=\"m-0 p-0\">{{Quantity}}</h4 ></td><td class= \"add-border padding-for-cell\" ><h4 class= \"m-0 p-0\" >{{ItemCode}}</h4 ></td><td class= \"add-border padding-for-cell\" > <h4 class= \"m-0 p-0\" >{{Type}}</h4 ><h6 class= \"m-0 p-0\" > ISBN:{{ISBN}}</h6 ></td></tr > ";
+                string txt = "<tr><td class=\"add-border padding-for-cell\"><h4 class=\"m-0 p-0\">{{Quantity}}</h4 ></td><td class= \"add-border padding-for-cell\" ><h4 class= \"m-0 p-0\" >{{ItemCode}}</h4 ></td><td class= \"add-border padding-for-cell\" > <h4 class= \"m-0 p-0\" >{{Type}}</h4 ><p class= \"m-0 p-0\" > ISBN:{{ISBN}}</p ></td></tr > ";
 
                 txt = txt.Replace("{{Quantity}}", product.Quantity.ToString());
                 txt = txt.Replace("{{ItemCode}}", product.ItemCode);
@@ -197,7 +197,7 @@ namespace PdfSharpApp
 
             //The actual PDF generation
             var OurPdfPage = PdfGenerator.GeneratePdf(htmlText.ToString(), configurationOptions);
-            SetFooter(OurPdfPage);
+            //SetFooter(OurPdfPage);
 
             OurPdfPage.Save("Output.pdf");
         }
