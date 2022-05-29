@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <style>
+          .my-table tr td{
+              border: 2px solid;
+          }
+        </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    </head>
+<body>
+    <h3>Products contained in this shipment</h3>
+    <table class="my-table w-100 m-1">
+        <thead>
+        <tr>
+            <th><h6 class="m-0 p-0 pe-2">Quantity</h6></th>
+            <th><h6 class="m-0 p-0 pe-2">Item Code</h6></th>
+            <th><h6 class="m-0 p-0">Item description</h6></th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><h4 class="m-0 p-0">{{Quantity1}}</h4></td>
+            <td><h4 class="m-0 p-0">{{ItemCode1}}</h4></td>
+            <td>
+                <h4 class="m-0 p-0">{{type1}}</h4>
+                <h6 class="m-0 p-0">ISBN:{{ISBN1}}</h6>
+            </td>
+        </tr>
+        <tr>
+            <td><h4 class="m-0 p-0">{{Quantity2}}</h4></td>
+            <td><h4 class="m-0 p-0">{{ItemCode2}}</h4></td>
+            <td>
+                <h4 class="m-0 p-0">{{type2}}</h4>
+                <h6 class="m-0 p-0">ISBN:{{ISBN2}}</h6>
+            </td>
+        </tr>
+        <tr>
+            <td><h4 class="m-0 p-0">{{Quantity3}}</h4></td>
+            <td><h4 class="m-0 p-0">{{ItemCode3}}</h4></td>
+            <td>
+                <h4 class="m-0 p-0">{{type3}}</h4>
+                <h6 class="m-0 p-0">ISBN:{{ISBN3}}</h6>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>
