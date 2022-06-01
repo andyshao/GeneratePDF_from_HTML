@@ -68,40 +68,6 @@ namespace PdfSharpApp
             return body.ToString();
         }
 
-        static void BuildModel()
-        {
-            CustomerDetails customerDetails = new CustomerDetails();
-            customerDetails.Quantity1 = 10;
-            customerDetails.ItemCode1 = "Sugar50";
-            customerDetails.Type1 = "food";
-            customerDetails.ISBN1 = 123124455;
-
-            customerDetails.Quantity2 = 20;
-            customerDetails.ItemCode2 = "Coffee30";
-            customerDetails.Type2 = "powder";
-            customerDetails.ISBN2 = 23215444;
-
-            customerDetails.Quantity3 = 30;
-            customerDetails.ItemCode3 = "Tea100";
-            customerDetails.Type3 = "powder";
-            customerDetails.ISBN3 = 32232332;
-
-            htmlText.Replace("{{Quantity1}}", (customerDetails.Quantity1).ToString());
-            htmlText.Replace("{{ItemCode1}}", customerDetails.ItemCode1);
-            htmlText.Replace("{{Type1}}", customerDetails.Type1);
-            htmlText.Replace("{{ISBN1}}", (customerDetails.ISBN1).ToString());
-
-            htmlText.Replace("{{Quantity2}}", (customerDetails.Quantity2).ToString());
-            htmlText.Replace("{{ItemCode2}}", customerDetails.ItemCode2);
-            htmlText.Replace("{{Type2}}", customerDetails.Type2);
-            htmlText.Replace("{{ISBN2}}", (customerDetails.ISBN2).ToString());
-
-            htmlText.Replace("{{Quantity3}}", (customerDetails.Quantity3).ToString());
-            htmlText.Replace("{{ItemCode3}}", customerDetails.ItemCode3);
-            htmlText.Replace("{{Type3}}", customerDetails.Type3);
-            htmlText.Replace("{{ISBN3}}", (customerDetails.ISBN3).ToString());
-        }
-
         static List<ProductDetail> BuildModel_Main()
         {
             List<ProductDetail> products = new List<ProductDetail>();
@@ -110,35 +76,13 @@ namespace PdfSharpApp
             product.ItemCode = "Sugar50";
             product.Type = "food";
             product.ISBN = 123124455;
-            products.Add(product);
 
-            ProductDetail product2 = new ProductDetail();
-            product2.Quantity = 9;
-            product2.ItemCode = "Sugdddfar50";
-            product2.Type = "CPT Professional (Spiral)";
-            product2.ISBN = 123124555;
-            products.Add(product2);
-
-            ProductDetail product3 = new ProductDetail();
-            product3.Quantity = 100;
-            product3.ItemCode = "dsfsadf";
-            product3.Type = "CPT Professional (Spiral)";
-            product3.ISBN = 1124455;
-            products.Add(product3);
-
-            ProductDetail product4 = new ProductDetail();
-            product4.Quantity = 100;
-            product4.ItemCode = "dsfsadf";
-            product4.Type = "CPT Professional (Spiral)";
-            product4.ISBN = 1124455;
-            products.Add(product4);
-
-            ProductDetail product5 = new ProductDetail();
-            product5.Quantity = 100;
-            product5.ItemCode = "dsfsadf";
-            product5.Type = "CPT Professional (Spiral)";
-            product5.ISBN = 1124455;
-            products.Add(product5);
+            for (int i = 0; i < 50; i++)
+            {
+                product.Quantity = i + 1;
+                products.Add(product);
+            }
+            //products.Add(product8);
 
             return products;
         }
@@ -156,6 +100,8 @@ namespace PdfSharpApp
 
             //BuildModel();
             CreateProductsTable();
+            List<ProductDetail> products = BuildModel_Main();
+            SetFooter(products);
             GeneratePDF();
 
         }
@@ -163,20 +109,42 @@ namespace PdfSharpApp
         private static void CreateProductsTable()
         {
             StringBuilder productTableHtml = new StringBuilder();
-
             List<ProductDetail> products = BuildModel_Main();
-            foreach (ProductDetail product in products)
+            int numOfProducts = products.Count;
+            for (int i = 0; i < numOfProducts; i++)
             {
-                string txt = "<tr><td class=\"add-border padding-for-cell\"><h4 class=\"m-0 p-0\">{{Quantity}}</h4 ></td><td class= \"add-border padding-for-cell\" ><h4 class= \"m-0 p-0\" >{{ItemCode}}</h4 ></td><td class= \"add-border padding-for-cell\" > <h4 class= \"m-0 p-0\" >{{Type}}</h4 ><p class= \"m-0 p-0\" > ISBN:{{ISBN}}</p ></td></tr > ";
+                string orderDetailHtmlText;
+                if (i == 9 || (i - 9) % 19 == 0)
+                {
+                    orderDetailHtmlText = "</table><br style=\"margin-top:50px\"><table class=\"width-95 product-table margin-table\"><tr><td class=\"add-border padding-for-cell\"><h4 class=\"m-0 p-0\">{{Quantity}}</h4 ></td><td class= \"add-border padding-for-cell\" ><h4 class= \"m-0 p-0\" >{{ItemCode}}</h4 ></td><td class= \"add-border padding-for-cell\" > <h4 class= \"m-0 p-0\" >{{Type}}</h4 ><p class= \"m-0 p-0\" > ISBN:{{ISBN}}</p ></td></tr > ";
+                }
+                else
+                {
+                    orderDetailHtmlText = "<tr><td class=\"add-border padding-for-cell\"><h4 class=\"m-0 p-0\">{{Quantity}}</h4 ></td><td class= \"add-border padding-for-cell\" ><h4 class= \"m-0 p-0\" >{{ItemCode}}</h4 ></td><td class= \"add-border padding-for-cell\" > <h4 class= \"m-0 p-0\" >{{Type}}</h4 ><p class= \"m-0 p-0\" > ISBN:{{ISBN}}</p ></td></tr > ";
+                }
+                orderDetailHtmlText = orderDetailHtmlText.Replace("{{Quantity}}", products[i].Quantity.ToString());
+                orderDetailHtmlText = orderDetailHtmlText.Replace("{{ItemCode}}", products[i].ItemCode);
+                orderDetailHtmlText = orderDetailHtmlText.Replace("{{Type}}", products[i].Type);
+                orderDetailHtmlText = orderDetailHtmlText.Replace("{{ISBN}}", products[i].ISBN.ToString());
 
-                txt = txt.Replace("{{Quantity}}", product.Quantity.ToString());
-                txt = txt.Replace("{{ItemCode}}", product.ItemCode);
-                txt = txt.Replace("{{Type}}", product.Type);
-                txt = txt.Replace("{{ISBN}}", product.ISBN.ToString());
-
-                productTableHtml.Append(txt);
+                productTableHtml.Append(orderDetailHtmlText);
             }
             htmlText.Replace("{{productDetailsContent}}", productTableHtml.ToString());
+        }
+
+        private static void SetFooter(List<ProductDetail> products)
+        {
+            int n = products.Count;
+            string footerHtml = "<div class=\"margin-table footer add-border w-95\" {{StyleForFooter}} ><p>Comments: <span class=\"font-weight-bold\">Customers has a dock and recieve truck shipments</span></p> </div>";
+            if (n == 6 || (n - 9) % 15 == 0)
+            {
+                footerHtml = footerHtml.Replace("{{StyleForFooter}}", "style=\"margin-top: 90px\"");
+            }
+            else
+            {
+                footerHtml = "<div class=\"margin-table footer add-border w-95\"><p>Comments: <span class=\"font-weight-bold\">Customers has a dock and recieve truck shipments</span></p> </div>";
+            }
+            htmlText = htmlText.Replace("{{footer}}", footerHtml);
         }
 
         private static void GeneratePDF()
@@ -200,34 +168,6 @@ namespace PdfSharpApp
             //SetFooter(OurPdfPage);
 
             OurPdfPage.Save("Output.pdf");
-        }
-
-        private static void SetFooter(PdfDocument OurPdfPage)
-        {
-            //Setting Font for our footer
-            XFont font = new XFont("Segoe UI,Open Sans, sans-serif, serif", 7);
-            XBrush brush = XBrushes.Black;
-
-            //Loop through our generated PDF pages, one by one
-            for (int i = 0; i < OurPdfPage.PageCount; i++)
-            {
-                //Get each page
-                PdfSharp.Pdf.PdfPage page = OurPdfPage.Pages[i];
-
-                //Create rectangular area that will hold our footer – play with dimensions according to your page'scontent height and width
-                XRect layoutRectangle = new XRect(0, (page.Height - (font.Height + 9)), page.Width, (font.Height - 7));
-
-                //Draw the footer on each page
-                using (XGraphics gfx = XGraphics.FromPdfPage(page))
-                {
-                    gfx.DrawString(
-                        "Page " + i + " of " + OurPdfPage.PageCount,
-                        font,
-                        brush,
-                        layoutRectangle,
-                        XStringFormats.Center);
-                }
-            }
         }
     }
 
